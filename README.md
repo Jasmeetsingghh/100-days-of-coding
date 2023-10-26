@@ -1,3 +1,3 @@
-# 100-days-of-coding
+# 75-days-of-coding
 first repository
 author-jasmeet
