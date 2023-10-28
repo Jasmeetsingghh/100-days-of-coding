@@ -1,0 +1,83 @@
+Q6.Find the Majority Element that occurs more than N/2 times?
+  public class Solution {
+    public int majorityElement(int[] nums) {
+        int count = 0;
+        int major = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (count == 0) {
+                major = nums[i];
+            }
+            if (nums[i] == major) {
+                count++;
+            } else {
+                count--;
+            }
+        }
+        return major;
+    }
+}
+(MOORE'S VOTING ALGO)
+ 
+Q7.Sort an array of 0s, 1s and 2s?
+  class Solution {
+    public void sortColors(int[] nums) {
+        int n=nums.length;
+        int s=0,e=n-1,mid=0;
+        while(mid<=e){
+            if(nums[mid]==0){
+                int swap=nums[mid];
+                nums[mid]=nums[s];
+                nums[s]=swap;
+                s++;mid++;
+            }
+            else if(nums[mid]==1){
+                mid++;
+            }
+            else{//nums[mid]==2
+            int swap=nums[mid];
+            nums[mid]=nums[e];
+            nums[e]=swap;
+            e--;
+            }
+
+        }
+    }
+}
+(YOU CAN SIMPLY USE SORTING ALSO)
+ 
+Q8.Two Sum : Check if a pair with given sum exists in Array?
+  class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int n=nums.length;
+        HashMap<Integer,Integer>map=new HashMap<>();
+        int []result=new int[2];
+        for(int i=0;i<n;i++){
+            if(map.containsKey(target-nums[i])){
+            result[1]=i;//0
+            result[0]=map.get(target-nums[i]);//1
+            return result;
+            }
+            map.put(nums[i],i);
+        }
+        return result;
+    }
+}
+ 
+Q9.Count Maximum Consecutive One’s in the array?
+  class Solution {
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int c=0;
+        int maxi=0;
+        int n=nums.length;
+        for(int i=0;i<n;i++){
+            if(nums[i]==1){
+                c++;
+                maxi=Math.max(c,maxi);
+            }else{
+                c=0;
+            }
+           
+        }
+        return maxi;
+    }
+}
