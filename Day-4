@@ -1,0 +1,37 @@
+Q10.Move all Zeros to the end of the array
+  class Solution {
+    public void moveZeroes(int[] nums) {
+        int n=nums.length;
+        int i=0;
+        int j=0;
+        while(i<n){
+            if(nums[i]!=0){
+                if(j<i){
+                    int swap=nums[i];
+                    nums[i]=nums[j];
+                    nums[j]=swap;
+                }
+                j++;
+            }
+            i++;
+        }
+    }
+}
+Q11.Stock Buy And Sell
+  class Solution {
+    public int maxProfit(int[] a) {
+        int buy=a[0];
+        int maxp=0;
+        for(int i=0;i<a.length;i++){
+            if(buy<a[i]){
+               int p=a[i]-buy;
+                maxp=Math.max(maxp,p);
+            }
+            else{
+                buy=a[i];
+            }
+        }
+        return maxp;
+    }
+}
+  
