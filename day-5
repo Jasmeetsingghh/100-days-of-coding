@@ -1,0 +1,53 @@
+Q12.Check if two Strings are anagrams of each other?
+  class Solution {
+    public boolean isAnagram(String s, String t) {
+        s=s.toLowerCase();
+        t=t.toLowerCase();
+        char []c1=s.toCharArray();
+        char []c2=t.toCharArray();
+        Arrays.sort(c1);
+        Arrays.sort(c2);
+        if(c1.length!=c2.length){
+            return false;
+        }
+        for(int i=0;i<c1.length;i++){
+            if(c1[i]!=c2[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+Q13.Group Anagrams?
+  class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String,List<String> >map=new HashMap<>();
+        for(String i:strs){
+            char []charArr= i.toCharArray();
+            Arrays.sort(charArr);
+            String sorted=new String(charArr);
+
+            if(!map.containsKey(sorted)){
+                map.put(sorted ,new LinkedList<>());
+            }
+            map.get(sorted).add(i);
+        }
+        return new LinkedList<>(map.values());
+        
+    }
+}
+Q14.Kadane’s Algorithm : Maximum Subarray Sum in an Array?
+  public class Solution {
+    public int maxSubArray(int[] arr) {
+        int sum = 0;
+        int maxi = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            sum = sum + arr[i];
+            maxi = Math.max(maxi, sum);
+            if (sum < 0) {
+                sum = 0;
+            }
+        }
+        return maxi;
+    }
+}
