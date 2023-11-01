@@ -1,0 +1,98 @@
+Q17.Sort an Array without using any built-in functions?
+  class Solution {
+    public int[] sortArray(int[] nums) {
+        return mergesort(nums, 0, nums.length - 1);
+    }
+
+    public int[] mergesort(int[] nums, int low, int high) {
+        if (low >= high) {
+            int[] baseArray = { nums[low] };
+            return baseArray;
+        }
+        
+        int mid = low + (high - low) / 2;
+        int[] left = mergesort(nums, low, mid);
+        int[] right = mergesort(nums, mid + 1, high);
+        return merge(left, right);
+    }
+
+    public int[] merge(int[] left, int[] right) {
+        int[] temp = new int[left.length + right.length];
+        int i = 0, j = 0, k = 0;
+
+        while (i < left.length && j < right.length) {
+            if (left[i] < right[j]) {
+                temp[k] = left[i];
+                i++;
+            } else {
+                temp[k] = right[j];
+                j++;
+            }
+            k++;
+        }
+        
+        while (i < left.length) {
+            temp[k] = left[i];
+            i++;
+            k++;
+        }
+        
+        while (j < right.length) {
+            temp[k] = right[j];
+            j++;
+            k++;
+        }
+        
+        return temp;
+    }
+}
+Q18.Given the head of a singly linked list, write a program to reverse the linked list, and return the head pointer to the reversed list.
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = null;  
+        ListNode current = head;
+    
+        
+        while(current != null) { 
+            ListNode next = current.next; 
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+       return prev; 
+    }
+}
+Q19.Check if given Linked List is Plaindrome?
+  class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if(head == null || head.next==null){
+            return true;
+        }
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode curr = slow;
+        ListNode prev = null;
+        ListNode next;
+        while(curr != null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        ListNode right = prev;
+        ListNode left = head;
+        while(right != null){
+            if(right.val != left.val){
+                return false;
+            }
+            right = right.next;
+            left = left.next;
+        } 
+        return true;
+    }
+}
+  
