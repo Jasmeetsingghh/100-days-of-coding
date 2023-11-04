@@ -1,0 +1,55 @@
+Q21.Longest Substring Without Repeating Characters?
+  class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        Map<Character,Integer> map = new HashMap();
+        int start = 0;
+        int maxLength = 0;
+        for(int end = 0; end < s.length(); end++){
+            char rightChar = s.charAt(end);
+            if(map.containsKey(rightChar)){
+                start = Math.max(start,map.get(rightChar)+1);
+            }
+            map.put(rightChar,end);
+            maxLength = Math.max(maxLength,end-start+1);
+        }
+        return maxLength;
+    }
+}
+Q22.Find Peak Element?
+  class Solution {
+    public int findPeakElement(int[] arr) {
+        int n = arr.length;
+        int low=0, high=n-1,mid;
+        if(n==1){
+            return 0;
+        }
+
+        if(arr[low]>arr[low+1]){ 
+            return low;
+        }
+        else if(arr[high]>arr[high-1]){
+            return high; 
+        }
+        else{
+            low++;
+            high--;
+        }
+    
+        while(low<=high){
+            mid = (low+high)/2;
+            if(arr[mid]>arr[mid-1] && arr[mid]>arr[mid+1]){
+                return mid;
+            }
+            else if(arr[mid-1]>arr[mid]){
+                if(arr[mid+1]>arr[mid] && arr[mid+1]!=arr[mid-1]){
+                    return mid+1;
+                }
+                high = mid-1;
+            }
+            else{
+                low = mid+1;
+            }
+        }
+        return -1;
+    }
+}
